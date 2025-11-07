@@ -17,7 +17,7 @@ const shopProducts = PRODUCTS
 <style scoped lang="scss">
 
 .shop-container {
-    height: 33%;
+    height: 32%;
 
     .products-container {
         height: 100%;
