@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-container">
+  <div class="main-container">
     <Shop/>
   </div>
 </template>
@@ -11,7 +11,7 @@ import Shop from './components/Shop.vue';
 
 <style scoped lang="scss">
 
-.cart-container {
+.main-container {
   background-color: $color-secondary;
   padding: 8px;
   height: 100%;

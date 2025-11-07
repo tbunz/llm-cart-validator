@@ -1,15 +1,14 @@
 <template>
   <div class="shop-container">
-    <div>
-        Click to add products
+    <div class="products-container">
+        <Product v-for="sp in shopProducts" :product="sp"/>
     </div>
-
-    <div v-for="product in shopProducts">{{ product?.name }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { PRODUCTS } from '~/data';
+import Product from './Product.vue';
 
 const shopProducts = PRODUCTS
 
@@ -17,5 +16,22 @@ const shopProducts = PRODUCTS
 
 <style scoped lang="scss">
 
+.shop-container {
+    height: 33%;
+
+    .products-container {
+        height: 100%;
+        @include flex-between;
+        gap: 8px; 
+        overflow-x: auto;   
+        flex-wrap: nowrap;  
+        -webkit-overflow-scrolling: touch; 
+        > * {
+            flex: 0 0 auto;
+            min-width: 225px; 
+        }
+        
+    }
+}
 
 </style>

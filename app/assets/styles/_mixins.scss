@@ -4,3 +4,16 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin flex-between($dir: row) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin respond-to-1000 {
+  @media (max-width: 1000px) {
+    @content;
+  }
+}
