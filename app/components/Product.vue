@@ -14,6 +14,7 @@
     <div><span class="bold">Category: </span>{{ product?.category }}</div>
 
     <span ref="label" class="floating-label">Add to cart</span>
+    <span class="add">+</span>
   </div>
 </template>
 
@@ -41,7 +42,6 @@ function handleMouseEnter() {
   $gsap.to(card.value, {
     duration: 0.25,
     scale: 0.97,
-    borderWidth: 3,
     borderColor: '#fff',
     boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.5)',
     ease: 'power3.out',
@@ -66,7 +66,6 @@ function handleMouseLeave() {
   $gsap.to(card.value, {
     duration: 0.25,
     scale: 1,
-    borderWidth: 2,
     borderColor: '#000',
     boxShadow: 'none',
     ease: 'power3.inOut'
@@ -105,6 +104,7 @@ function handleMouseMove(e: MouseEvent) {
 <style scoped lang="scss">
 
 .product-container {
+    position: relative;
     padding: 8px;
     height: 100%;;
     border: 2px solid;

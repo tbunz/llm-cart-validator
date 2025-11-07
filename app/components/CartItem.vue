@@ -1,6 +1,12 @@
 <template>
   <div class="cart-item-container">
-    <div>{{ product?.name }}</div>
+    <div class="name-brand">
+        <span>{{ product?.name }}</span>
+        <span class="brand">({{ product?.brand }})</span>
+    </div>
+    <div>
+        {{ qty }} x  ${{ product?.price }}
+    </div>
   </div>
 </template>
 
@@ -19,7 +25,17 @@ const { product } = useProduct(props.productId)
 <style scoped lang="scss">
 
 .cart-item-container {
-    
+    @include flex-between;
+
+    .name-brand {
+        @include flex-between;
+        align-items: baseline;
+        gap: 4px;
+
+        .brand {
+            font-size: 13px;
+        }
+    }
 }
 
 </style>
