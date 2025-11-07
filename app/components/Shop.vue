@@ -1,7 +1,7 @@
 <template>
   <div class="shop-container">
     <div class="products-container">
-        <Product v-for="sp in shopProducts" :product="sp"/>
+        <Product :key="sp.id" v-for="sp in shopProducts" :product="sp"/>
     </div>
   </div>
 </template>
@@ -17,13 +17,14 @@ const shopProducts = PRODUCTS
 <style scoped lang="scss">
 
 .shop-container {
-    height: 32%;
+    height: 38%;
 
     .products-container {
         height: 100%;
         @include flex-between;
         gap: 8px; 
         overflow-x: auto;   
+        overflow-y: hidden;
         flex-wrap: nowrap;  
         -webkit-overflow-scrolling: touch; 
         > * {
