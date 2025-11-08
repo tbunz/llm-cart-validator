@@ -1,6 +1,6 @@
 <template>
   <div class="cart-container">
-    <div class="cart">CART</div>
+    <div class="cart">CART <span v-if="cart?.totalItems" @click="cart.clearCart" class="clear">&lpar;clear&rpar;</span></div>
     <div v-if="cart?.totalItems">
         <div v-for="item in cart.items" :key="item.productId">
             <CartItem :product-id="item.productId" :qty="item.quantity"/>
@@ -31,6 +31,17 @@ const { totalCost } = useCartTotal()
       text-transform: uppercase;
       font-weight: 600;
       margin-bottom: 8px;
+
+      .clear {
+        text-transform: none;
+        font-weight: 400;
+        font-size: 13px;
+        cursor: pointer;
+
+        &:hover {
+          color: red;
+        }
+      }
     }
 
     .total {

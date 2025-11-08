@@ -1,5 +1,5 @@
 <template>
-  <div class="cart-item-container">
+  <div @click="cart.removeItem(productId)" class="cart-item-container">
     <div class="name-brand">
         <span>{{ product?.name }}</span>
         <span class="brand">({{ product?.brand }})</span>
@@ -11,8 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Product } from '~/types';
-
 const props = defineProps<{
   productId: number,
   qty: number
@@ -20,12 +18,16 @@ const props = defineProps<{
 
 const { product } = useProduct(props.productId)
 
+const cart = useCartStore()
+
 </script>
 
 <style scoped lang="scss">
 
 .cart-item-container {
     @include flex-between;
+    cursor: pointer;
+    margin: 4px 0;
 
     .name-brand {
         @include flex-between;
@@ -35,6 +37,10 @@ const { product } = useProduct(props.productId)
         .brand {
             font-size: 13px;
         }
+    }
+
+    &:hover {
+        color: red;
     }
 }
 
