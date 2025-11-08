@@ -14,7 +14,6 @@
     <div><span class="bold">Category: </span>{{ product?.category }}</div>
 
     <span ref="label" class="floating-label">Add to cart</span>
-    <span class="add">+</span>
   </div>
 </template>
 

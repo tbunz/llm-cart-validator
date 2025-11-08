@@ -79,3 +79,8 @@ export const PRODUCTS: Product[] = [
         price: 2,
     },
 ]
+
+export const DEALS = [
+    "test deal 1 test deal 1 test deal 1 test deal 1 test deal 1. test deal 1 deal 1 test deal 1 test deal 1 test dealdeal 1 test deal 1 test deal 1 test deal deal 1 test deal 1 test deal 1 test deal deal 1 test deal 1 test deal 1 test deal", 
+    "test deal 2"
+]
