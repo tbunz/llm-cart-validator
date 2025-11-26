@@ -1,7 +1,7 @@
 <template>
   <div class="deal">
     <div>{{ deal }}</div>
-    <button class="validate">Validate</button>
+    <button class="validate" @click="validate">Validate</button>
   </div>
 </template>
 
@@ -10,6 +10,17 @@ const props = defineProps<{
   deal: string,
 }>()
 
+const { data, pending, error, execute } = useFetch('/api/validate', {
+  method: 'POST',
+  immediate: false, 
+  body: {
+    message: props.deal
+  }
+})
+
+function validate() {
+  execute()        
+}
 </script>
 
 <style scoped lang="scss">
