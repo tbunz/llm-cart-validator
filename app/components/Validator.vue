@@ -1,6 +1,11 @@
 <template>
   <div class="validator-container">
-    <div class="deal-validator">Deal Criteria Validator</div>
+    <div class="title">
+      <div class="title-text">
+        <span>Deal Criteria Validator</span>
+        <Tooltip :size="11" :strokeWidth="2" className="tool-tip"/>
+      </div>
+    </div>
     <div class="deals-container">
       <div class="deal-wrap" v-for="deal in deals" :key="deal">
         <Deal :deal="deal"/>
@@ -25,10 +30,23 @@ const deals = DEALS
     border: 2px solid;
     padding: 8px;
 
-    .deal-validator {
+    .title {
       text-transform: uppercase;
       font-weight: 600;
       margin-bottom: 8px;
+
+      .title-text {
+        position: relative;
+        display: flex;
+        gap: 2px;
+
+        .tool-tip {
+          cursor: pointer;
+          &:hover {
+            color: white;
+          }
+        }
+      }
     }
 
     .deals-container {

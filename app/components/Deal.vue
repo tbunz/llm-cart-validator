@@ -1,7 +1,7 @@
 <template>
   <div class="deal">
     <div>{{ deal }}</div>
-    <button class="validate" :class="{ pending: pending }" @click="validate">{{ pending ? "Loading..." : "Validate" }}</button>
+    <button class="validate" :class="{ pending: pending }" @click="handleValidate" :disabled="pending">{{ pending ? "Loading..." : "Validate" }}</button>
   </div>
 </template>
 
@@ -10,42 +10,12 @@ const props = defineProps<{
   deal: string,
 }>()
 
-const combinedMessage = ref('')
-
-const { data, pending, error, execute } = useFetch('/api/validate', {
-  method: 'POST',
-  immediate: false, 
-  body: computed(() => ({
-    message: combinedMessage.value
-  }))
-})
-
-watchEffect(() => {
-  const textBlock = data.value?.content?.find(block => 'text' in block)
-  console.log(textBlock?.text)
-})
 
 const cart = useCartStore()
+const { pending, validationText, validateDeal } = useValidation()
 
-async function validate() {
-  // Fetch product info for each item ID
-  const itemsWithProductInfo = await Promise.all(
-    cart.items.map(async (itemIdQty) => {
-      const { product } = useProduct(itemIdQty.productId)
-      return {
-        ...product.value, 
-        "qty": itemIdQty.quantity
-      }
-    })
-  )
-  
-  // Stringify and combine with props.deal
-  const cartItemsString = JSON.stringify(itemsWithProductInfo)
-  combinedMessage.value = `Deal:\n${props.deal}\n\nCart Items:\n${cartItemsString}`
-  
-  console.log(combinedMessage.value)
-  
-  execute()
+const handleValidate = async () => {
+  await validateDeal(props.deal, cart.items)
 }
 </script>
 
