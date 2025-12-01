@@ -8,7 +8,6 @@ export function useCartTotal() {
 
   const totalCost = computed(() =>
     cart.items.reduce((sum, item) => {
-      // get product info via your existing composable
       const { product } = useProduct(item.productId)
       const price = product.value?.price ?? 0
 

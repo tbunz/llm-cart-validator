@@ -1,4 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk"
+import { CLAUDE_SYSTEM_PROMPT } from "~/data";
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig()
@@ -15,6 +16,8 @@ export default defineEventHandler(async (event) => {
   const msg = await anthropic.messages.create({
     model: "claude-sonnet-4-5",
     max_tokens: 1000,
+    system: CLAUDE_SYSTEM_PROMPT,
+    temperature: 0,
     messages: [
       {
         role: "user",
@@ -22,9 +25,6 @@ export default defineEventHandler(async (event) => {
       }
     ]
   });
-  console.log(msg);
 
-  return {
-    ok: true,
-  }
+  return msg
 })
