@@ -17,7 +17,7 @@
         <div class="deal-wrap" v-for="deal in deals" :key="deal">
           <Deal :deal="deal"/>
         </div>
-        <CustomDeal/>
+        <CustomDeal :memory="customDealMemory" @update:memory="customDealMemory = $event"/>
       </div>
     </div>
 
@@ -29,6 +29,7 @@ import { CLAUDE_SYSTEM_PROMPT, DEALS } from '~/data';
 
 const deals = DEALS
 const message = ref<string>('');
+const customDealMemory = ref<string>('');
 
 // Function to set a message
 const setMessage = (msg: string) => {

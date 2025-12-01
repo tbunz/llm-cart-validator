@@ -20,7 +20,15 @@
 </template>
 
 <script setup lang="ts">
-const newDeal = ref('')
+const props = defineProps<{
+  memory?: string
+}>();
+
+const emit = defineEmits<{
+  'update:memory': [value: string]
+}>();
+
+const newDeal = ref(props.memory || '')
 const textarea = ref<HTMLTextAreaElement | null>(null)
 
 const cart = useCartStore()
@@ -45,6 +53,11 @@ watch(validationText, (newText) => {
   if (newText && setMessage) {
     setMessage("RESPONSE: \n\n" + newText)
   }
+})
+
+// Emit updates to parent when user types
+watch(newDeal, (newValue) => {
+  emit('update:memory', newValue);
 })
 
 onMounted(() => {

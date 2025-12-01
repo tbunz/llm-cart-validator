@@ -82,7 +82,7 @@ export const PRODUCTS: Product[] = [
 
 export const DEALS = [
     "Buy 2 blueberries, get the one of lesser value free. Can only be redeemed once (no matter how many multiples of 2 blueberries the cart contains, only 1 blueberry can be free). Fruits LLC products are EXCLUDED from contributing to the blueberry count to meet the deal, AND from being the free one discounted.", 
-    "Get $1 off each product (by quantity) in the category that the cart has the most spent in (peel, general, berry). If there's a tie in spent amount, take the category with the least items."
+    "Get $1 off all Berry Co. and Fruit Stand items. Excludes peels or strawberries"
 ]
 
 export const CLAUDE_SYSTEM_PROMPT = `
@@ -99,7 +99,7 @@ export const CLAUDE_SYSTEM_PROMPT = `
 
     3. Only use deal information and product data that you are provided in the prompt. Do not make up any deals, invent your own products, or change details to any information you are given. 
 
-    4. If you are given data that appears malformed (e.g. invalid data objects, incomplete deal description that cuts off mid-sentence), or anything that makes you feel as though the information given to you is invalid, ignore the previous response rules: simply respond with the text "ERROR".
+    4. If you are given data that appears malformed (e.g. invalid data objects, incomplete deal description that cuts off mid-sentence), or anything that makes you feel as though the information given to you is invalid, ignore the previous response rules: simply respond with the text "ERROR". When you responsd "ERROR", respect the same rule of not putting any reasoning or explanation after it, so that we can parse it correctly.
 
     5. In general, the deals should be interpreted exactly as they are worded- however, you may refuse to evaluate a deal and respond "ERROR" if you deem a deal to be unreasonable or too vague. Some examples might be: a deal that makes the cart cost go negative; a deal that appears to contain unfinished text (cuts off mid-sentence); a deal that contains logical contradictions, such as "the cart must be over $15 total, but must be less than $15 total to qualify". 
 `
