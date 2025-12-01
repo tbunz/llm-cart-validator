@@ -14,9 +14,17 @@ const props = defineProps<{
 const cart = useCartStore()
 const { pending, validationText, validateDeal } = useValidation()
 
+const setMessage = inject<(msg: string) => void>('setMessage')
+
 const handleValidate = async () => {
   await validateDeal(props.deal, cart.items)
 }
+
+watch(validationText, (newText) => {
+  if (newText && setMessage) {
+    setMessage("RESPONSE: \n\n" + newText)
+  }
+})
 </script>
 
 <style scoped lang="scss">

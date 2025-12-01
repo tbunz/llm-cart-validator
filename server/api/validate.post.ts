@@ -25,6 +25,6 @@ export default defineEventHandler(async (event) => {
       }
     ]
   });
-
+  console.log(msg)
   return msg
 })

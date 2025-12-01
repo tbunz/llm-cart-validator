@@ -25,6 +25,7 @@ const textarea = ref<HTMLTextAreaElement | null>(null)
 
 const cart = useCartStore()
 const { pending, validationText, error, validateDeal } = useValidation()
+const setMessage = inject<(msg: string) => void>('setMessage')
 
 const autoResize = () => {
   const el = textarea.value
@@ -39,6 +40,12 @@ const handleValidate = async () => {
   
   await validateDeal(newDeal.value, cart.items)
 }
+
+watch(validationText, (newText) => {
+  if (newText && setMessage) {
+    setMessage("RESPONSE: \n\n" + newText)
+  }
+})
 
 onMounted(() => {
   nextTick(autoResize)

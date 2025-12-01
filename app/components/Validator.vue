@@ -1,25 +1,52 @@
 <template>
   <div class="validator-container">
-    <div class="title">
-      <div class="title-text">
-        <span>Deal Criteria Validator</span>
-        <Tooltip :size="11" :strokeWidth="2" className="tool-tip"/>
+     <div v-if="message" class="message-display">
+        <button class="back" @click="clearMessage">BACK</button>
+        <div class="response">{{ message }}</div>
+      </div>
+    <div v-else>
+      <div class="title">
+        <div class="title-text">
+          <span>Deal Criteria Validator</span>
+          <span title="View system prompt">
+            <Tooltip :size="11" :strokeWidth="2" className="tool-tip" @click="showSysPrompt"/>
+          </span>
+        </div>
+      </div>
+      <div class="deals-container">
+        <div class="deal-wrap" v-for="deal in deals" :key="deal">
+          <Deal :deal="deal"/>
+        </div>
+        <CustomDeal/>
       </div>
     </div>
-    <div class="deals-container">
-      <div class="deal-wrap" v-for="deal in deals" :key="deal">
-        <Deal :deal="deal"/>
-      </div>
-      <CustomDeal/>
-    </div>
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { DEALS } from '~/data';
+import { CLAUDE_SYSTEM_PROMPT, DEALS } from '~/data';
 
 const deals = DEALS
+const message = ref<string>('');
 
+// Function to set a message
+const setMessage = (msg: string) => {
+  message.value = msg;
+};
+
+// Function to clear the message
+const clearMessage = () => {
+  message.value = '';
+};
+
+// Provide functions to child components
+provide('setMessage', setMessage);
+provide('clearMessage', clearMessage);
+
+const showSysPrompt = () => {
+  setMessage("SYSTEM PROMPT:" + CLAUDE_SYSTEM_PROMPT)
+}
 </script>
 
 <style scoped lang="scss">
@@ -29,6 +56,7 @@ const deals = DEALS
     background-color: $color-primary;
     border: 2px solid;
     padding: 8px;
+    overflow: hidden;
 
     .title {
       text-transform: uppercase;
@@ -46,6 +74,28 @@ const deals = DEALS
             color: white;
           }
         }
+      }
+    }
+
+    .message-display {
+      white-space: pre-wrap;
+      overflow-y: auto;
+      height: 100%;
+
+      .back {
+        border: 2px solid;
+        cursor: pointer;
+        background-color: $color-secondary;
+        margin-bottom: 8px;
+        &:hover {
+            color: #fff;
+        }
+      }
+
+      .response {
+        padding: 8px;
+        background-color: $color-secondary;
+        border: 2px solid;
       }
     }
 

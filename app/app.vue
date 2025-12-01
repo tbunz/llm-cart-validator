@@ -28,6 +28,7 @@ import Validator from './components/Validator.vue';
     margin-top: 8px;
     @include flex-between;
     gap: 8px;
+    overflow: hidden;
   }
 }
 
