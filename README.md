@@ -1,3 +1,5 @@
+https://llm-cart-validator.vercel.app/
+
 # LLM E-commerce Deal Evaluation Prototype
 
 **What if promotional deals didn't need a rule engine?**
@@ -83,3 +85,4 @@ This prototype uses simple string-based prompts. A production system would add:
 ## Disclaimers
 
 This is a personal prototype and portfolio piece. I came up with this idea while at a previous employer, but it was never approved or put into production. All data here is fictional.
+
